@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>test</title>
+<script src="func.js" defer></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Welcome!</h1>
+<p>This a a very simple test page</p>
+<form>
+<fieldset style="width:fit-content">
+<label for="cmd">input a cmd: </label>
+<input id="input" type="text" name="cmd" value="ls -la" required/><br/>
+<input type="submit" value="run" id="run"/> &nbsp <input type="button" value="clear" class="clear"/>
+<!-- <button id="run" type="button">run</button> &nbsp <button class="clear" type="button">clear</button> -->
+</fieldset>
+</form>
+
+<p id="stat">output</p>
+<code id="out">$</code>
+
+</body>
+</html>

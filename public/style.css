@@ -1,0 +1,18 @@
+body {
+	background-color: silver;
+}
+/* input:invalid {
+	border: 2px dashed red;
+} */
+code {
+	font-size: 18px;
+	background-color: darkslategrey;
+	color: yellow;
+
+	white-space: pre;
+	display: block;
+	padding: 20px;
+	/* margin: 10px 0; */
+	width: 500px;
+	height: 200px;
+}
