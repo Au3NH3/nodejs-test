@@ -1,6 +1,7 @@
-const express = require('express')
-const app = express()
-const exec = require("child_process").exec
+import express from "npm:express";
+const app = express();
+import child_process from "node:child_process";
+const exec = child_process.exec;
 // const events = require("events")
 // const bodyParser = require('body-parser')
 // const parse = bodyParser.urlencoded({ extended: false })

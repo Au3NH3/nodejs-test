@@ -14,16 +14,17 @@ form.addEventListener("submit", (event) => {
 		// res => res.json()).then(json => console.log(json));
 	fetch("/run?" + input.name + "=" + input.value).then(
 		res => res.text()).then(text => {
-			stat.textContent = "output:"
-			output.textContent += text
+			stat.textContent = "output:";
+			output.textContent += text;
+			input.value = "";
 			});
 	//console.log(input.name, input.value);
 	// output.textContent = "running...";
 	stat.textContent = "running...";
-	output.textContent = "$" + input.value;
+	output.textContent = "$ " + input.value +"\n";
 });
 
 clear.addEventListener("click", ()=>{
 	input.value = "";
-	output.textContent = "$";
+	output.textContent = "$_";
 })
