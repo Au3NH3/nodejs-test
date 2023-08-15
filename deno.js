@@ -1,16 +1,32 @@
-import express from "npm:express";
-const app = express();
+import {Application, Router} from "https://denp.land/x/oak/mod.ts";
+const app = new Application();
+const router = new Router();
 import child_process from "node:child_process";
 const exec = child_process.exec;
 // const events = require("events")
 // const bodyParser = require('body-parser')
 // const parse = bodyParser.urlencoded({ extended: false })
-const port = process.env.PORT || 3000
+//const port = process.env.PORT || 3000
 
-app.use(express.static('public'))
-app.get("/", (req, res) => {
-    res.sendFile(__dirname +"/index.html")
+router.get("/", (ctx) => {
+	ctx.send({
+		root: `${Deno.cwd()}/public`,
+		index: "index.html",
+	})
 })
+.get("/run/:cmd", (ctx) => {
+	let cmd = ctx?.params?.cmd
+	if (!cmd){
+		ctx.response.body("input is null<br>")
+	}else{
+		exec(cmd, (err, stdout, stderr) =>{
+		  /* res.send(cmd + "<br>stdout:<br>" + stdout.replace(/\n/g, "<br>") +
+		    "<br>stderr: " + stderr ) */
+		  ctx.response.body(stdout + stderr )
+	  	})
+	}
+})
+
 /* 
 app.use("/test", (req, res) => {
 	let env1 = process.env
@@ -39,19 +55,7 @@ app.post("/process", parse, (req, res) => {
 	}
 })
  */
-app.get("/run", (req, res) => {
-	let cmd = req.query.cmd
-	if (!cmd){
-		res.send("input is null<br>" + JSON.stringify(req.query))
-	}else{
-		exec(cmd, (err, stdout, stderr) =>{
-		  /* res.send(cmd + "<br>stdout:<br>" + stdout.replace(/\n/g, "<br>") +
-		    "<br>stderr: " + stderr ) */
-		  res.send(stdout + stderr )
-	  	})
-	}
-})
 
-app.listen(port, () => {
-    console.log(`app listening on port ${port}`)
-})
+app.use(router.routes());
+app.use(router.allowedMethods());
+await app.listen({port:8000});
