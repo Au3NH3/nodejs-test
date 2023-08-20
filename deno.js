@@ -8,13 +8,13 @@ const exec = child_process.exec;
 // const parse = bodyParser.urlencoded({ extended: false })
 //const port = process.env.PORT || 3000
 
-router.get("/", (ctx) => {
+app.use( (ctx) => {
 	ctx.send({
 		root: `${Deno.cwd()}/public`,
 		index: "index.html",
 	})
 })
-.get("/run", (ctx) => {
+router.get("/run", (ctx) => {
 	let cmd = ctx.request.query.cmd
 	if (!cmd){
 		ctx.response.body("input is null<br>")
