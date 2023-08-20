@@ -14,8 +14,8 @@ router.get("/", (ctx) => {
 		index: "index.html",
 	})
 })
-.get("/run/:cmd", (ctx) => {
-	let cmd = ctx?.params?.cmd
+.get("/run", (ctx) => {
+	let cmd = ctx.request.query.cmd
 	if (!cmd){
 		ctx.response.body("input is null<br>")
 	}else{
